@@ -31,6 +31,11 @@ namespace YaD
             textBox2.ReadOnly = true;
             textBox3.ReadOnly = true;
             textBox4.ReadOnly = true;
+
+            Column1.Width = 170;
+            Column2.Width = 185;
+            Column3.Width = 90;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
