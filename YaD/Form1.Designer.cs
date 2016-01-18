@@ -55,13 +55,13 @@
             this.Column1.HeaderText = "Папка ТТ";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 200;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "Название ТТ";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Width = 200;
             // 
             // Column3
             // 

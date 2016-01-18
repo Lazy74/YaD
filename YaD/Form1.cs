@@ -35,14 +35,16 @@ namespace YaD
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            arrayTT[0] = new TT("C:\\YandexDisk\\Лавка\\TT_04", "Порт");
-            arrayTT[1] =new TT("C:\\YandexDisk\\Лавка\\TT_05", "Точка 05");
-            arrayTT[2] =new TT("C:\\YandexDisk\\Лавка\\TT_17", "Точка 17");
+            arrayTT[0] = new TT("Порт", "C:\\YandexDisk\\TT_04");
+            arrayTT[1] =new TT("Точка 05", "C:\\YandexDisk\\TT_05");
+            arrayTT[2] =new TT("Точка 17", "C:\\YandexDisk\\TT_17");
 
             for (int i = 0; i < 3; i++)
             {
                 dataGridView1.Rows.Add(arrayTT[i].NameTT, arrayTT[i].DirTT);
-                if (File.Exists(arrayTT[0].DirTT + "\\FL*.ttxt"))
+                //MessageBox.Show(arrayTT[i].DirTT);
+                //File.Create(arrayTT[i].DirTT + "\\123.txt");
+                if (File.Exists(Convert.ToString(arrayTT[i].DirTT + "\\Fl*.ttxt"))) 
                 {
                     dataGridView1.Rows[i].Cells[2].Style.BackColor = Color.Red;
                 }
