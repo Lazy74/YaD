@@ -15,22 +15,11 @@ namespace YaD
     public partial class Form1 : Form
     {
         TT[] arrayTT = new TT[20];
+        private string FileMask = "Fl*.ttxt";
 
         public Form1()
         {
             InitializeComponent();
-
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    if (i + 1 < 9)
-            //    {
-            //        arrayTT[i] = new TT(@"C:\YandexDisk\Лавка\TT_0" + i,"");
-            //    }
-            //    else
-            //    {
-            //        arrayTT[i] = new TT(@"C:\YandexDisk\Лавка\TT_" + i, "");
-            //    }
-            //}
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,9 +31,9 @@ namespace YaD
             for (int i = 0; i < 3; i++)
             {
                 dataGridView1.Rows.Add(arrayTT[i].NameTT, arrayTT[i].DirTT);
-                //MessageBox.Show(arrayTT[i].DirTT);
-                //File.Create(arrayTT[i].DirTT + "\\123.txt");
-                if (File.Exists(Convert.ToString(arrayTT[i].DirTT + "\\Fl*.ttxt"))) 
+                //Проверка существования файла по маске "Fl*.ttxt"
+                string[] files = System.IO.Directory.GetFiles(arrayTT[i].DirTT, FileMask, System.IO.SearchOption.TopDirectoryOnly);
+                if (files.Length > 0)
                 {
                     dataGridView1.Rows[i].Cells[2].Style.BackColor = Color.Red;
                 }
