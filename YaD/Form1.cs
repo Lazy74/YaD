@@ -42,16 +42,25 @@ namespace YaD
 
             //string FileNameTT = System.IO.File.ReadAllText(Directory.GetCurrentDirectory());
             //string FileDirTT = System.IO.File.ReadAllText(Directory.GetCurrentDirectory());
-            StreamReader sr = new StreamReader(Directory.GetCurrentDirectory()+ "\\Settings.txt", System.Text.Encoding.Default);
-            string line;
-            while (!sr.EndOfStream)
+            try
             {
-                line = sr.ReadLine();
-                string[] str = line.Split('|');
-                arrayTT[N] = new TT(str[0],str[1]);
-                N++;
+                StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "\\Settings.txt", System.Text.Encoding.Default);
+                string line;
+                while (!sr.EndOfStream)
+                {
+                    line = sr.ReadLine();
+                    string[] str = line.Split('|');
+                    arrayTT[N] = new TT(str[0], str[1]);
+                    N++;
+                }
+                sr.Close();
             }
-            sr.Close();
+            catch (Exception)
+            {
+                MessageBox.Show("Не удалось открыть файл настоек/nПуть к файлу:  " + Directory.GetCurrentDirectory());
+                Application.Exit();
+                throw;
+            }
 
             //Можно удалить
             //arrayTT[0] = new TT("Порт", "C:\\YandexDisk\\TT_04");
