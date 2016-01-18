@@ -17,6 +17,7 @@ namespace YaD
     {
         TT[] arrayTT = new TT[20];
         private static string FileMask = "Fl*.ttxt";        //Маска файла
+        public int N = 0;   //Количесткво ТТ
 
         public Form1()
         {
@@ -39,11 +40,25 @@ namespace YaD
             textBox3.BackColor = Color.Orange;      //От 15 до 30 минут (900<=t<1800)
             textBox4.BackColor = Color.Red;         //Более 30 минут (1800<=t)
 
-            arrayTT[0] = new TT("Порт", "C:\\YandexDisk\\TT_04");
-            arrayTT[1] =new TT("Точка 05", "C:\\YandexDisk\\TT_05");
-            arrayTT[2] =new TT("Точка 17", "C:\\YandexDisk\\TT_17");
+            //string FileNameTT = System.IO.File.ReadAllText(Directory.GetCurrentDirectory());
+            //string FileDirTT = System.IO.File.ReadAllText(Directory.GetCurrentDirectory());
+            StreamReader sr = new StreamReader(Directory.GetCurrentDirectory()+ "\\Settings.txt", System.Text.Encoding.Default);
+            string line;
+            while (!sr.EndOfStream)
+            {
+                line = sr.ReadLine();
+                string[] str = line.Split('|');
+                arrayTT[N] = new TT(str[0],str[1]);
+                N++;
+            }
+            sr.Close();
 
-            for (int i = 0; i < 3; i++)
+            //Можно удалить
+            //arrayTT[0] = new TT("Порт", "C:\\YandexDisk\\TT_04");
+            //arrayTT[1] = new TT("Точка 05", "C:\\YandexDisk\\TT_05");
+            //arrayTT[2] = new TT("Точка 17", "C:\\YandexDisk\\TT_17");
+
+            for (int i = 0; i < N; i++)
             {
                 dataGridView1.Rows.Add(arrayTT[i].NameTT, arrayTT[i].DirTT);
                 
@@ -99,7 +114,7 @@ namespace YaD
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < N; i++)
             {
                 int lifetime = CheckFiles(arrayTT[i].DirTT);
                 if (lifetime != 0)
