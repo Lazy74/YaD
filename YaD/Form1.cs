@@ -24,6 +24,7 @@ namespace YaD
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridView1.MultiSelect = false;
+            dataGridView1.RowHeadersVisible = false;
 
             textBox1.ReadOnly = true;
             textBox2.ReadOnly = true;
