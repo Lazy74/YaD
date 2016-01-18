@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace YaD
 {
@@ -20,10 +21,23 @@ namespace YaD
         public Form1()
         {
             InitializeComponent();
+
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dataGridView1.MultiSelect = false;
+
+            textBox1.ReadOnly = true;
+            textBox2.ReadOnly = true;
+            textBox3.ReadOnly = true;
+            textBox4.ReadOnly = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            textBox1.BackColor = Color.LimeGreen;       //Мение 5 минут (t<300 секунд)
+            textBox2.BackColor = Color.Yellow;      //от 5 до 15 минут (300<=t<900)
+            textBox3.BackColor = Color.Orange;      //От 15 до 30 минут (900<=t<1800)
+            textBox4.BackColor = Color.Red;         //Более 30 минут (1800<=t)
+
             arrayTT[0] = new TT("Порт", "C:\\YandexDisk\\TT_04");
             arrayTT[1] =new TT("Точка 05", "C:\\YandexDisk\\TT_05");
             arrayTT[2] =new TT("Точка 17", "C:\\YandexDisk\\TT_17");
@@ -38,13 +52,13 @@ namespace YaD
                 }
                 else
                 {
-                    dataGridView1.Rows[i].Cells[2].Style.BackColor = System.Drawing.Color.Green;
+                    dataGridView1.Rows[i].Cells[2].Style.BackColor = System.Drawing.Color.LimeGreen;
                 }
             }
             timerUpdate.Start();
         }
 
-        //Поиск файлов 
+        //Поиск файлов. Возвращает время существования файла
         private int CheckFiles(string Dir)
         {
             int lifetime = 0;
@@ -65,19 +79,71 @@ namespace YaD
             }
         }
 
+        private string ConvertSecondToTime(int second)
+        {
+            string time = "";
+            if (second/3600 >= 1)
+            {
+                time = Convert.ToString(second/3600) + "ч ";
+                second %= 3600;
+            }
+            if (second/60 >= 1)
+            {
+                time += Convert.ToString(second/60) + "м ";
+                second %= 60;
+            }
+            time += Convert.ToString(second) + "c ";
+            return time;
+        }
+
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             for (int i = 0; i < 3; i++)
             {
-                if (CheckFiles(arrayTT[i].DirTT) != 0)
+                int lifetime = CheckFiles(arrayTT[i].DirTT);
+                if (lifetime != 0)
                 {
-                    dataGridView1.Rows[i].Cells[2].Style.BackColor = Color.Red;
+                    if (300<=lifetime & lifetime<900)
+                    {
+                        //от 5 до 15 минут (300<=t<900)
+                        dataGridView1.Rows[i].Cells[2].Style.BackColor = Color.Yellow;
+                        dataGridView1.Rows[i].Cells[2].Value = ConvertSecondToTime(lifetime);
+                    }
+                    else if (900 <= lifetime & lifetime < 1800)
+                    {
+                        //От 15 до 30 минут (900<=t<1800)
+                        dataGridView1.Rows[i].Cells[2].Style.BackColor = Color.Orange;
+                        dataGridView1.Rows[i].Cells[2].Value = ConvertSecondToTime(lifetime);
+                    }
+                    else if (1800 <= lifetime)
+                    {
+                        //Более 30 минут (1800<=t)
+                        dataGridView1.Rows[i].Cells[2].Style.BackColor = Color.Red;
+                        dataGridView1.Rows[i].Cells[2].Value = ConvertSecondToTime(lifetime);
+                    }
+                    else
+                    {
+                        //Мение 5 минут (t<300 секунд)
+                        dataGridView1.Rows[i].Cells[2].Value = ConvertSecondToTime(lifetime);
+                        dataGridView1.Rows[i].Cells[2].Style.BackColor = System.Drawing.Color.LimeGreen;
+                    }
                 }
                 else
                 {
-                    dataGridView1.Rows[i].Cells[2].Style.BackColor = System.Drawing.Color.Green;
+                    //файла нет
+                    dataGridView1.Rows[i].Cells[2].Value = "Ок";
+                    dataGridView1.Rows[i].Cells[2].Style.BackColor = System.Drawing.Color.LimeGreen;
                 }
             }
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ((DataGridView)sender).SelectedCells[0].Selected = false;
+            }
+            catch { }
         }
     }
 

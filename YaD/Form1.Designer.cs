@@ -34,6 +34,10 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,8 +53,9 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(393, 420);
+            this.dataGridView1.Size = new System.Drawing.Size(433, 420);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // Column1
             // 
@@ -70,34 +75,80 @@
             this.Column3.HeaderText = "Онлайн";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            this.Column3.Width = 50;
+            this.Column3.Width = 90;
             // 
             // timerUpdate
             // 
             this.timerUpdate.Interval = 1000;
             this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox1.Location = new System.Drawing.Point(439, 12);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(105, 20);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "Мение 5 минут";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox2.Location = new System.Drawing.Point(439, 38);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(105, 20);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.Text = "От 5 до 15 минут";
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox3.Location = new System.Drawing.Point(439, 64);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(105, 20);
+            this.textBox3.TabIndex = 3;
+            this.textBox3.Text = "От 15 до 30 минут";
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox4.Location = new System.Drawing.Point(439, 90);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(105, 20);
+            this.textBox4.TabIndex = 4;
+            this.textBox4.Text = "Более 30 минут";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 421);
+            this.ClientSize = new System.Drawing.Size(547, 421);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Яндекс Диск в ТТ";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.Timer timerUpdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
 
