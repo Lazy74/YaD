@@ -236,6 +236,7 @@ namespace YaD
                 dataGridView1.Location = new Point(0, 52);
                 Height = dataGridView1.Height + 91;
                 Width = dataGridView1.Width + 16;
+                FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
     }
