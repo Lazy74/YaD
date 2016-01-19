@@ -29,16 +29,16 @@ namespace YaD
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
+            Column1.MinimumWidth =100;
+            Column2.MinimumWidth =100;
+            Column3.MinimumWidth =50;
 
+            
             textBox1.ReadOnly = true;
             textBox2.ReadOnly = true;
             textBox3.ReadOnly = true;
             textBox4.ReadOnly = true;
-
-            Column1.Width = 170;
-            Column2.Width = 185;
-            Column3.Width = 90;
-
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -86,7 +86,14 @@ namespace YaD
                     dataGridView1.Rows[i].Cells[2].Style.BackColor = System.Drawing.Color.LimeGreen;
                 }
             }
+            dataGridView1.AutoResizeColumns();
+            Column1.Width += 10;
+            Column2.Width += 10;
+            Column3.Width += 10;
             timerUpdate.Start();
+            dataGridView1.Width = Column1.Width + Column2.Width + Column3.Width + 3;
+            Width = dataGridView1.Width+15;
+            Height = dataGridView1.Height + 90;
         }
 
         //Поиск файлов. Возвращает время существования файла
