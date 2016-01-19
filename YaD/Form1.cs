@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace YaD
             dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridView1.MultiSelect = false;
             dataGridView1.RowHeadersVisible = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
 
             textBox1.ReadOnly = true;
             textBox2.ReadOnly = true;
@@ -44,9 +47,7 @@ namespace YaD
             textBox2.BackColor = Color.Yellow;      //от 5 до 15 минут (300<=t<900)
             textBox3.BackColor = Color.Orange;      //От 15 до 30 минут (900<=t<1800)
             textBox4.BackColor = Color.Red;         //Более 30 минут (1800<=t)
-
-            //string FileNameTT = System.IO.File.ReadAllText(Directory.GetCurrentDirectory());
-            //string FileDirTT = System.IO.File.ReadAllText(Directory.GetCurrentDirectory());
+            
             try
             {
                 StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "\\Settings.txt", System.Text.Encoding.Default);
@@ -74,7 +75,7 @@ namespace YaD
 
             for (int i = 0; i < N; i++)
             {
-                dataGridView1.Rows.Add(arrayTT[i].NameTT, arrayTT[i].DirTT);
+                dataGridView1.Rows.Add(arrayTT[i].NameTT,arrayTT[i].DirTT);
                 
                 if (CheckFiles(arrayTT[i].DirTT)!=0)
                 {
@@ -185,6 +186,14 @@ namespace YaD
             else
             {
                 TopMost = false;
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex==1)
+            {
+                Process.Start(new ProcessStartInfo("explorer.exe", Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells[1].Value)));
             }
         }
     }
