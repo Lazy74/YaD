@@ -224,7 +224,6 @@ namespace YaD
             }
             else
             {
-                FormBorderStyle = FormBorderStyle.SizableToolWindow;
                 textBox1.Visible = true;
                 textBox2.Visible = true;
                 textBox3.Visible = true;
