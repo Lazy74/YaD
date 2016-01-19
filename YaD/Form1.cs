@@ -92,8 +92,9 @@ namespace YaD
             Column3.Width += 10;
             timerUpdate.Start();
             dataGridView1.Width = Column1.Width + Column2.Width + Column3.Width + 3;
-            Width = dataGridView1.Width+15;
-            Height = dataGridView1.Height + 90;
+            Width = dataGridView1.Width+16;
+            dataGridView1.Height = 2+dataGridView1.Rows.GetRowsHeight(DataGridViewElementStates.Visible) + dataGridView1.ColumnHeadersHeight;
+            Height = dataGridView1.Height + 91;
         }
 
         //Поиск файлов. Возвращает время существования файла
@@ -201,6 +202,40 @@ namespace YaD
             if (e.ColumnIndex==1)
             {
                 Process.Start(new ProcessStartInfo("explorer.exe", Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells[1].Value)));
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true)
+            {
+                FormBorderStyle = FormBorderStyle.SizableToolWindow;
+                textBox1.Visible = false;
+                textBox2.Visible = false;
+                textBox3.Visible = false;
+                textBox4.Visible = false;
+                checkBox1.Location = new Point(2,2);
+                checkBox2.Location = new Point(130,2);
+                dataGridView1.Columns[1].Visible = false;
+                dataGridView1.Width = Column1.Width + Column3.Width + 3;
+                dataGridView1.Location = new Point(0,20);
+                Height = dataGridView1.Height + 59;
+                Width = dataGridView1.Width + 16;
+            }
+            else
+            {
+                FormBorderStyle = FormBorderStyle.SizableToolWindow;
+                textBox1.Visible = true;
+                textBox2.Visible = true;
+                textBox3.Visible = true;
+                textBox4.Visible = true;
+                checkBox1.Location = new Point(234, 2);
+                checkBox2.Location = new Point(234, 28);
+                dataGridView1.Columns[1].Visible = true;
+                dataGridView1.Width = Column1.Width + Column2.Width + Column3.Width + 3;
+                dataGridView1.Location = new Point(0, 52);
+                Height = dataGridView1.Height + 91;
+                Width = dataGridView1.Width + 16;
             }
         }
     }
