@@ -175,6 +175,18 @@ namespace YaD
             }
             catch { }
         }
+
+        private void Form1_Deactivate(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                TopMost = true;
+            }
+            else
+            {
+                TopMost = false;
+            }
+        }
     }
 
     class TT
