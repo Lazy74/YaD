@@ -140,7 +140,7 @@ namespace YaD
             for (int i = 0; i < N; i++)
             {
                 int lifetime = CheckFiles(arrayTT[i].DirTT);
-                if (lifetime != 0)
+                if (lifetime > 0)
                 {
                     if (300<=lifetime & lifetime<900)
                     {
